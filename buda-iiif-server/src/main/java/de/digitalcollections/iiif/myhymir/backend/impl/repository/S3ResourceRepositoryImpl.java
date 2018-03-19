@@ -95,43 +95,9 @@ public class S3ResourceRepositoryImpl implements ResourceRepository<Resource> {
     @Override
     public S3Resource find(String key, ResourcePersistenceType resourcePersistenceType, MimeType mimeType) throws ResourceIOException {
         S3Resource resource = create(key, resourcePersistenceType, mimeType);
-        
-        //resource=mapS3ObjectToResource(resource,obj);
         return resource;
     }
     
-    public static S3Resource trouve(String key, ResourcePersistenceType resourcePersistenceType, MimeType mimeType) throws ResourceIOException {
-        S3Resource resource = new S3Resource();
-        resource.setIdentifier(key);
-        if (mimeType != null) {
-          if (mimeType.getExtensions() != null && !mimeType.getExtensions().isEmpty()) {
-            resource.setFilenameExtension(mimeType.getExtensions().get(0));
-          }
-          resource.setMimeType(mimeType);
-        }
-        if (ResourcePersistenceType.REFERENCED.equals(resourcePersistenceType)) {
-          resource.setReadonly(true);
-        }
-        if (ResourcePersistenceType.MANAGED.equals(resourcePersistenceType)) {
-          resource.setUuid(UUID.fromString(key));
-        }
-        AmazonS3 s3=S3ResourceRepositoryImpl.getClientInstance();
-        S3Object obj=null;
-        try {
-            GetObjectRequest request = new GetObjectRequest(
-                    props.getProperty(S3_BUCKET),
-                    key);
-            
-            obj=s3.getObject(request);
-        } 
-        catch (AmazonS3Exception e) {            
-            throw new ResourceIOException(e.getMessage());            
-        }
-        resource.setLastModified(obj.getObjectMetadata().getLastModified().getTime());
-        resource.setSize(obj.getObjectMetadata().getContentLength());
-        return resource;
-    }
-
     @Override
     public byte[] getBytes(Resource r) throws ResourceIOException {
       throw new UnsupportedOperationException("Not supported yet."); 
