@@ -17,8 +17,7 @@ public class S3Resource implements Resource{
     private URI uri;
     private String identifier;
     
-    
-    
+        
     public S3Resource() {
         super();        
     }
