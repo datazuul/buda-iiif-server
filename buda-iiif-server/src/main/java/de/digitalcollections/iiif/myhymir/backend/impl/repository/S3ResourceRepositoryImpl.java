@@ -43,7 +43,7 @@ import com.amazonaws.services.s3.model.S3Object;
 @Repository
 public class S3ResourceRepositoryImpl implements ResourceRepository<Resource> {
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(S3ResourceRepositoryImpl.class);    
+    private static final Logger log = LoggerFactory.getLogger(S3ResourceRepositoryImpl.class);    
     
     
     static Properties props = new Properties();
@@ -116,6 +116,7 @@ public class S3ResourceRepositoryImpl implements ResourceRepository<Resource> {
     }
     
     public InputStream getInputStream(S3Resource r) throws ResourceIOException{
+        log.info("Getting input stream for resource >> "+r.toString());
         AmazonS3 s3=S3ResourceRepositoryImpl.getClientInstance();
         S3Object obj=null;
         try {
@@ -123,11 +124,14 @@ public class S3ResourceRepositoryImpl implements ResourceRepository<Resource> {
                     props.getProperty(S3_BUCKET),
                     r.getIdentifier());
             obj=s3.getObject(request);
+            log.info("Obj from s3 >> "+obj);
         } 
         catch (AmazonS3Exception e) {            
             throw new ResourceIOException(e.getMessage());            
         }
-        return obj.getObjectContent();
+        InputStream stream=obj.getObjectContent();
+        log.info("Obj from s3 >> "+stream);
+        return stream;
     }
 
     @Override
@@ -164,7 +168,7 @@ public class S3ResourceRepositoryImpl implements ResourceRepository<Resource> {
           fr.close();
         } catch (IOException ex) {
             String msg="Coudn't load S3 properties... ";
-            LOGGER.error(msg, ex);
+            log.error(msg, ex);
             throw new IllegalStateException(ex);
         }      
     }
