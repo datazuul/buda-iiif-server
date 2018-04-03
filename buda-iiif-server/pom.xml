@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
+
   <modelVersion>4.0.0</modelVersion>
-  
+
   <groupId>de.digitalcollections</groupId>
   <artifactId>hymir-bdrc</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    
+
     <version.hymir>3.5.0-SNAPSHOT</version.hymir>
     <version.maven-compiler-plugin>3.7.0</version.maven-compiler-plugin>
     <version.spring-boot>1.5.8.RELEASE</version.spring-boot>
   </properties>
-  
+
   <dependencies>
-       <!--dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${version.spring-boot}</version>
-        </dependency>
-        <dependency>
+    <!--dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency-->
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${version.spring-boot}</version>
+    </dependency>
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-tomcat</artifactId>
-        <version>${version.spring-boot}</version> 
-        <scope>provided</scope>       
+        <scope>provided</scope>
+    </dependency-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <version>${version.spring-boot}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>de.digitalcollections</groupId>
@@ -50,8 +50,8 @@
       <artifactId>dc-core-backend-file</artifactId>
       <version>2.0.3</version>
     </dependency>
-    
-     <!-- Used by S3 ResourceRepository -->
+
+    <!-- Used by S3 ResourceRepository -->
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-core</artifactId>
@@ -61,23 +61,23 @@
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-s3</artifactId>
       <version>1.11.220</version>
-    </dependency>    
-  </dependencies>  
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.5.1</version>
-            <inherited>true</inherited>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
+        <inherited>true</inherited>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>        
+        <artifactId>maven-resources-plugin</artifactId>
         <configuration>
           <delimiters>
             <delimiter>@</delimiter>
@@ -86,30 +86,19 @@
         </configuration>
       </plugin>
       <plugin>
-         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->          
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.2.0</version>
-            <configuration>
-                <attachClasses>true</attachClasses>
-                <webResources>
-                    <resource>
-                        <directory>src/main/webapp</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                    <resource>
-                        <directory>src/main/resources</directory>                                               
-                    </resource>                              
-                </webResources>                
-            </configuration>            
-         </plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${version.spring-boot}</version>
         <configuration>
           <mainClass>de.digitalcollections.iiif.myhymir.Application</mainClass>
-          <classifier>exec</classifier>
+          <!--<classifier>exec</classifier>-->
         </configuration>
         <executions>
           <execution>
@@ -135,7 +124,7 @@
       </resource>
     </resources>
   </build>
-  
+
   <repositories>
     <repository>
       <id>ossrh-snapshots</id>
