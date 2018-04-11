@@ -1,13 +1,13 @@
 # local/default
 buda:
   ## TODO: put real values here and work with external application.yml in production (to keep credentials secret)
-  S3_ACCESS_KEY_ID: access_key_id
-  S3_BUCKET: bucket
-  S3_ENDPOINT: endpoint
-  S3_MAX_CONNECTIONS: max_connections
-  S3_REGION:  region
-  S3_RESOLVER: io.bdrc.iiif.resolver.BdrcS3Resolver
-  S3_SECRET_KEY: secret_key
+  S3_ACCESS_KEY_ID: 'xxxdevelopment system valuexxx'
+  S3_BUCKET: 'xxxdevelopment system valuexxx'
+  S3_ENDPOINT: 'xxxdevelopment system valuexxx'
+  S3_MAX_CONNECTIONS: 'xxxdevelopment system valuexxx'
+  S3_REGION:  'xxxdevelopment system valuexxx'
+  S3_RESOLVER: 'io.bdrc.iiif.resolver.BdrcS3Resolver'
+  S3_SECRET_KEY: 'xxxdevelopment system valuexxx'
 
 endpoints:
   hypermedia:
@@ -52,6 +52,17 @@ spring:
 ---
 
 # PROD
+
+buda:
+  ## TODO: put real values here and work with external application.yml in production (to keep credentials secret)
+  S3_ACCESS_KEY_ID: 'xxxproduction system valuexxx'
+  S3_BUCKET: 'xxxproduction system valuexxx'
+  S3_ENDPOINT: 'xxxproduction system valuexxx'
+  S3_MAX_CONNECTIONS: 'xxxproduction system valuexxx'
+  S3_REGION:  'xxxproduction system valuexxx'
+  S3_RESOLVER: 'io.bdrc.iiif.resolver.BdrcS3Resolver'
+  S3_SECRET_KEY: 'xxxproduction system valuexxx'
+
 management:
   security:
     enabled: true
