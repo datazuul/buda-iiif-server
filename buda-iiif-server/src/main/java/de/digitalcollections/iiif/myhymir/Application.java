@@ -15,15 +15,15 @@ import org.springframework.context.annotation.ComponentScan;
 //,
 //        excludeFilters = @ComponentScan.Filter(
 //                type = FilterType.ASSIGNABLE_TYPE, value = {ResourceRepositoryImpl.class}))
-public class Application extends SpringBootServletInitializer{
+public class Application extends SpringBootServletInitializer {
 
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(Application.class, args);
-    }
-    
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Application.class);
-    }
+  public static void main(String[] args) throws Exception {
+    SpringApplication.run(Application.class, args);
+  }
+
+  @Override
+  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    return application.sources(Application.class);
+  }
 
 }
